@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - HSGQG Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div class="brand-icon" style="padding: 0; background: transparent;">
+                    <img src="/static/logo_cyb.png" alt="Logo"
+                        style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+                </div>
+                <div class="brand-text">
+                    <h2>CYB SEARCH</h2>
+                    <p>Tra cứu & Xếp hạng</p>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="/" class="nav-item active" title="Trang Chủ">
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                            <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                    </span>
+                    <span class="label">Trang Chủ</span>
+                </a>
+                <a href="/ranking" class="nav-item" title="Bảng Xếp Hạng">
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="20" x2="12" y2="10" />
+                            <line x1="18" y1="20" x2="18" y2="4" />
+                            <line x1="6" y1="20" x2="6" y2="16" />
+                        </svg>
+                    </span>
+                    <span class="label">Bảng Xếp Hạng</span>
+                </a>
+                <a href="/search" class="nav-item" title="Tra Cứu">
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                    </span>
+                    <span class="label">Tra Cứu</span>
+                </a>
+                <a href="/stats" class="nav-item" title="Thống Kê">
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </span>
+                    <span class="label">Thống Kê</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p class="footer-text">Copyright © Chuyen Yen Bai.</p>
+                <p class="footer-text" style="font-size: 0.65rem; margin-top: 2px; opacity: 0.7;">Hoa Quang Thang -
+                    TiK35 - CYB</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="left-header">
+                    <button id="toggle-sidebar" class="icon-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <h2 id="page-title">Trang Chủ</h2>
+                </div>
+                <div class="user-info" style="display:flex; align-items:center">
+                    <span class="badge online-badge">
+                        <span class="online-indicator"></span>
+                        <span id="online-count">1</span> đang truy cập
+                    </span>
+                    <span class="badge">Live Data</span>
+                </div>
+            </header>
+
+            <div class="content-view active-view">
+                <div class="intro-hero glass-panel">
+                    <div class="hero-content">
+                        <h1>Hệ Thống Tra Cứu Kết Quả HSG Cấp Tỉnh Lào Cai</h1>
+                        <p>Công cụ hỗ trợ tra cứu điểm thi, xem bảng xếp hạng và thống kê kết quả.</p>
+                        <div class="hero-actions">
+                            <a href="/ranking" class="btn primary-btn" style="text-decoration:none">Xem Xếp Hạng
+                                Ngay</a>
+                            <a href="/search" class="btn secondary-btn" style="text-decoration:none">Tra Cứu Cá Nhân</a>
+                        </div>
+                    </div>
+                    <div class="hero-decoration">
+                        <div class="blob"></div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <a href="/ranking" class="feature-card glass-panel"
+                        style="text-decoration:none; color:inherit; cursor:pointer">
+                        <div class="feature-icon" style="background: #e0e7ff; color: #4338ca;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="12" y1="20" x2="12" y2="10" />
+                                <line x1="18" y1="20" x2="18" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="16" />
+                            </svg>
+                        </div>
+                        <h3>Bảng Xếp Hạng</h3>
+                        <p>Xếp hạng chi tiết theo từng môn học và trường trong tỉnh Lào Cai.</p>
+                    </a>
+                    <a href="/search" class="feature-card glass-panel"
+                        style="text-decoration:none; color:inherit; cursor:pointer">
+                        <div class="feature-icon" style="background: #dcfce7; color: #15803d;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                        </div>
+                        <h3>Tra Cứu SBD</h3>
+                        <p>Tìm kiếm nhanh kết quả thi của thí sinh thông qua Số Báo Danh.</p>
+                    </a>
+                    <a href="/stats" class="feature-card glass-panel"
+                        style="text-decoration:none; color:inherit; cursor:pointer">
+                        <div class="feature-icon" style="background: #ffedd5; color: #c2410c;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M12 2v20" />
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                            </svg>
+                        </div>
+                        <h3>Thống Kê</h3>
+                        <p>Xem thống kê tổng quan, phổ điểm và tình hình giải thưởng.</p>
+                    </a>
+                </div>
+
+                <!-- System Info Banner -->
+                <div class="system-banner glass-panel">
+                    <div class="banner-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M12 16v-4"></path>
+                            <path d="M12 8h.01"></path>
+                        </svg>
+                    </div>
+                    <div class="banner-content">
+                        <h3>Về Hệ Thống CYB Search</h3>
+                        <p>Hệ thống tra cứu và thống kê kết quả thi Học sinh giỏi cấp tỉnh Lào Cai. Dữ liệu được cập
+                            nhật từ nguồn chính thức của Sở Giáo dục và Đào tạo tỉnh Lào Cai, cung cấp thông tin tra cứu
+                            nhanh chóng, chính xác với
+                            giao diện thân thiện và dễ sử dụng.</p>
+                    </div>
+                </div>
+
+                <!-- Quick Stats Overview -->
+                <div class="stats-overview">
+                    <h2 class="section-title">Tổng Quan Thống Kê</h2>
+                    <div class="stats-grid-home">
+                        <div class="stat-card glass-panel">
+                            <div class="stat-icon"
+                                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">Tổng Thí Sinh</div>
+                                <div class="stat-value">3,000+</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card glass-panel">
+                            <div class="stat-icon"
+                                style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">Số Môn Thi</div>
+                                <div class="stat-value">14</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card glass-panel">
+                            <div class="stat-icon"
+                                style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">Đơn Vị</div>
+                                <div class="stat-value">Lào Cai</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card glass-panel">
+                            <div class="stat-icon"
+                                style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </div>
+                            <div class="stat-info">
+                                <div class="stat-label">Số Lượng Giải</div>
+                                <div class="stat-value">1,000+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Section -->
+                <div class="about-section glass-panel">
+                    <h2 class="section-title">Về Kỳ Thi HSG Tỉnh Lào Cai</h2>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p><strong>Kỳ thi Học sinh giỏi cấp Tỉnh</strong> là kỳ thi quan trọng trong hệ thống
+                                giáo dục phổ thông, nhằm tìm kiếm và bồi dưỡng những học sinh xuất sắc nhất của tỉnh Lào
+                                Cai.</p>
+                            <p>Đây là sân chơi học thuật uy tín, nơi các em học sinh có cơ hội thể hiện năng lực và
+                                được công nhận tài năng trong các môn học.</p>
+                            <ul class="about-features">
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    <span>Tổ chức hàng năm cho học sinh THPT</span>
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    <span>14 môn thi từ khoa học tự nhiên đến xã hội</span>
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                    <span>Học sinh xuất sắc được xét tuyển vào các trường chuyên</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Developer Info -->
+                <div class="developer-section glass-panel">
+                    <div class="developer-header">
+                        <div class="developer-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="16 18 22 12 16 6"></polyline>
+                                <polyline points="8 6 2 12 8 18"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Hệ Thống Được Phát Triển Bởi</h3>
+                    </div>
+                    <div class="developer-content">
+                        <div class="developer-info">
+                            <h4>Hòa Quang Thắng</h4>
+                            <p class="developer-role">Developer & Data Analyst</p>
+                            <p class="developer-school">Học Sinh Trường THPT Chuyên Nguyễn Tất Thành - Tỉnh Lào Cai</p>
+                        </div>
+                        <div class="developer-links">
+                            <a href="https://github.com/HoaThang34" target="_blank" rel="noopener" class="social-link"
+                                title="GitHub">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                            </a>
+                            <a href="https://www.facebook.com/ThGThanG.734" target="_blank" rel="noopener"
+                                class="social-link" title="Facebook">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                </svg>
+                            </a>
+                            <a href="hoathang34.09@gmail.com" class="social-link" title="Email">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="developer-footer">
+                        <p>💡 Hệ thống được xây dựng với mục đích hỗ trợ tra cứu thông tin kết quả thi HSG cấp tỉnh một
+                            cách nhanh chóng và tiện lợi.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Popup Notification -->
+    <div id="updateNotification" class="notification-popup">
+        <div class="notification-content">
+            <div class="notification-header">
+                <div class="notification-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </div>
+                <button id="closeNotification" class="close-notification-btn" aria-label="Đóng thông báo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="notification-body">
+                <h3>Thông Báo Cập Nhật</h3>
+                <p>Hệ thống đã hoàn tất cập nhật <strong>kết quả thi HSG cấp tỉnh Lào Cai</strong>.</p>
+                <p><strong>Lưu ý:</strong> Chưa xếp giải nên tất cả các thí sinh đều trong tình trạng <strong>chưa có
+                        giải</strong>.</p>
+                <p class="notification-detail">Bạn có thể tra cứu kết quả đầy đủ tại trang Tra Cứu hoặc xem Bảng Xếp
+                    Hạng.</p>
+            </div>
+            <div class="notification-footer">
+                <button id="dismissNotification" class="btn-dismiss">Đã hiểu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
