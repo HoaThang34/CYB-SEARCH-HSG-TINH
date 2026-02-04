@@ -584,5 +584,27 @@ if __name__ == "__main__":
     if os.path.exists("__pycache__"):
         shutil.rmtree("__pycache__", ignore_errors=True)
         
-    print("Starting server on http://localhost:3434")
-    uvicorn.run("app:app", host="0.0.0.0", port=3434, reload=True)
+    
+    import socket
+    def get_local_ip():
+        try:
+            # Connect to external server to get local interface IP
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            ip = s.getsockname()[0]
+            s.close()
+            return ip
+        except Exception:
+            return "127.0.0.1"
+
+    local_ip = get_local_ip()
+    port = 3434
+
+    print(f"\n{'='*50}")
+    print(f"Server starting...")
+    print(f"Local access:   http://localhost:{port}")
+    print(f"Mobile access:  http://{local_ip}:{port}")
+    print(f"Make sure your phone is connected to the same Wi-Fi")
+    print(f"{'='*50}\n")
+    
+    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=True)
