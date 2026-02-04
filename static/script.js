@@ -250,9 +250,51 @@ function setupSidebar() {
     const toggleBtn = document.getElementById('toggle-sidebar');
     const sidebar = document.getElementById('sidebar');
 
+    // Create overlay if it doesn't exist
+    let overlay = document.querySelector('.sidebar-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+    }
+
     if (toggleBtn && sidebar) {
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
+        toggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent immediate closing
+
+            if (window.innerWidth <= 768) {
+                // Mobile behavior
+                sidebar.classList.toggle('mobile-open');
+                overlay.classList.toggle('active');
+            } else {
+                // Desktop behavior
+                sidebar.classList.toggle('collapsed');
+            }
+        });
+
+        // Close when clicking overlay
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('mobile-open');
+            overlay.classList.remove('active');
+        });
+
+        // Close on navigation (mobile)
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+
+        // Handle resize reset
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+            }
         });
     }
 }
@@ -363,13 +405,13 @@ async function loadRanking(page = 1) {
                 tr.className = 'clickable-row';
 
                 tr.innerHTML = `
-                    <td class="text-center"><span class="table-rank-badge">${item.rank}</span></td>
-                    <td class="text-center"><span class="sbd-badge" style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:600; font-size:0.85rem">${c.sbd}</span></td>
-                    <td>${c.name}</td>
-                    <td style="color:#64748b">${c.school}</td>
-                    <td><span style="font-weight:500">${c.subject}</span></td>
-                    <td class="text-right"><b style="font-size:1.1rem">${c.total_score}</b></td>
-                    <td class="text-center">${renderPrize(c.prize)}</td>
+                    <td class="text-center" data-label="Hạng"><span class="table-rank-badge">${item.rank}</span></td>
+                    <td class="text-center" data-label="SBD"><span class="sbd-badge" style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:600; font-size:0.85rem">${c.sbd}</span></td>
+                    <td data-label="Họ và tên">${c.name}</td>
+                    <td style="color:#64748b" data-label="Trường">${c.school}</td>
+                    <td data-label="Môn thi"><span style="font-weight:500">${c.subject}</span></td>
+                    <td class="text-right" data-label="Điểm"><b style="font-size:1.1rem">${c.total_score}</b></td>
+                    <td class="text-center" data-label="Giải">${renderPrize(c.prize)}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -626,13 +668,13 @@ function renderStatsFull(stats, container) {
         stats.all_provinces.forEach((s, idx) => {
             tableRows += `
                 <tr>
-                    <td class="text-center"><span class="table-rank-badge" style="width:24px; height:24px; font-size:0.8rem">${idx + 1}</span></td>
-                    <td style="font-weight:500">${s.name}</td>
-                    <td class="text-center"><span class="prize-1" style="font-size:0.9rem; font-weight:700">${s.details['Nhất'] || '-'}</span></td>
-                    <td class="text-center"><span class="prize-2" style="font-size:0.9rem; font-weight:700">${s.details['Nhì'] || '-'}</span></td>
-                    <td class="text-center"><span class="prize-3" style="font-size:0.9rem; font-weight:700">${s.details['Ba'] || '-'}</span></td>
-                    <td class="text-center"><span class="prize-mk" style="font-size:0.9rem; font-weight:700">${s.details['K.Khích'] || '-'}</span></td>
-                    <td class="text-center"><span style="background:var(--primary); color:white; padding:2px 8px; border-radius:12px; font-size:0.85rem; font-weight:600">${s.count}</span></td>
+                    <td class="text-center" data-label="Hạng"><span class="table-rank-badge" style="width:24px; height:24px; font-size:0.8rem">${idx + 1}</span></td>
+                    <td style="font-weight:500" data-label="Đơn vị">${s.name}</td>
+                    <td class="text-center" data-label="Giải Nhất"><span class="prize-1" style="font-size:0.9rem; font-weight:700">${s.details['Nhất'] || '-'}</span></td>
+                    <td class="text-center" data-label="Giải Nhì"><span class="prize-2" style="font-size:0.9rem; font-weight:700">${s.details['Nhì'] || '-'}</span></td>
+                    <td class="text-center" data-label="Giải Ba"><span class="prize-3" style="font-size:0.9rem; font-weight:700">${s.details['Ba'] || '-'}</span></td>
+                    <td class="text-center" data-label="Khuyến Khích"><span class="prize-mk" style="font-size:0.9rem; font-weight:700">${s.details['K.Khích'] || '-'}</span></td>
+                    <td class="text-center" data-label="Tổng giải"><span style="background:var(--primary); color:white; padding:2px 8px; border-radius:12px; font-size:0.85rem; font-weight:600">${s.count}</span></td>
                 </tr>
             `;
         });
@@ -669,13 +711,13 @@ function renderStatsFull(stats, container) {
         stats.all_schools.forEach((s, idx) => {
             tableRows += `
                 <tr class="clickable-school" onclick="showSchool('${s.name}')">
-                    <td class="text-center"><span class="table-rank-badge" style="width:24px; height:24px; font-size:0.8rem">${idx + 1}</span></td>
-                    <td style="font-weight:500">${s.name}</td>
-                    <td class="text-center"><span class="prize-1" style="font-size:0.9rem; font-weight:700">${s.details['Nhất'] || '-'}</span></td>
-                    <td class="text-center"><span class="prize-2" style="font-size:0.9rem; font-weight:700">${s.details['Nhì'] || '-'}</span></td>
-                    <td class="text-center"><span class="prize-3" style="font-size:0.9rem; font-weight:700">${s.details['Ba'] || '-'}</span></td>
-                    <td class="text-center"><span class="prize-mk" style="font-size:0.9rem; font-weight:700">${s.details['K.Khích'] || '-'}</span></td>
-                    <td class="text-center"><span style="background:var(--primary); color:white; padding:2px 8px; border-radius:12px; font-size:0.85rem; font-weight:600">${s.count}</span></td>
+                    <td class="text-center" data-label="Hạng"><span class="table-rank-badge" style="width:24px; height:24px; font-size:0.8rem">${idx + 1}</span></td>
+                    <td style="font-weight:500" data-label="Trường">${s.name}</td>
+                    <td class="text-center" data-label="Giải Nhất"><span class="prize-1" style="font-size:0.9rem; font-weight:700">${s.details['Nhất'] || '-'}</span></td>
+                    <td class="text-center" data-label="Giải Nhì"><span class="prize-2" style="font-size:0.9rem; font-weight:700">${s.details['Nhì'] || '-'}</span></td>
+                    <td class="text-center" data-label="Giải Ba"><span class="prize-3" style="font-size:0.9rem; font-weight:700">${s.details['Ba'] || '-'}</span></td>
+                    <td class="text-center" data-label="Khuyến Khích"><span class="prize-mk" style="font-size:0.9rem; font-weight:700">${s.details['K.Khích'] || '-'}</span></td>
+                    <td class="text-center" data-label="Tổng giải"><span style="background:var(--primary); color:white; padding:2px 8px; border-radius:12px; font-size:0.85rem; font-weight:600">${s.count}</span></td>
                 </tr>
             `;
         });
@@ -773,12 +815,12 @@ async function showSchool(schoolName) {
                 const c = item.data;
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td class="text-center">${idx + 1}</td>
-                    <td class="text-center"><span class="sbd-badge" style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:600; font-size:0.85rem">${c.sbd}</span></td>
-                    <td>${c.name || 'Thí sinh'}</td>
-                    <td>${c.subject}</td>
-                    <td class="text-right"><b style="font-size:1.1rem">${c.total_score}</b></td>
-                    <td class="text-center">${renderPrize(c.prize)}</td>
+                    <td class="text-center" data-label="#">${idx + 1}</td>
+                    <td class="text-center" data-label="SBD"><span class="sbd-badge" style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:600; font-size:0.85rem">${c.sbd}</span></td>
+                    <td data-label="Tên">${c.name || 'Thí sinh'}</td>
+                    <td data-label="Môn">${c.subject}</td>
+                    <td class="text-right" data-label="Điểm"><b style="font-size:1.1rem">${c.total_score}</b></td>
+                    <td class="text-center" data-label="Giải">${renderPrize(c.prize)}</td>
                 `;
                 tbody.appendChild(tr);
             });
